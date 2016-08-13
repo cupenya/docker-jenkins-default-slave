@@ -42,7 +42,8 @@ COPY jenkins-slave /usr/local/bin/jenkins-slave
 
 
 
-VOLUME /home/jenkins
+#check if better isolated
+#VOLUME /home/jenkins
 WORKDIR /home/jenkins
 USER jenkins
 
