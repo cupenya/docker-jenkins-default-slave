@@ -23,6 +23,13 @@
 FROM cupenya/docker-oracle-jdk8
 MAINTAINER Elmar Weber <elmar(.)weber(@)cupenya(.)com>
 
+# install basic build tools
+RUN sudo apt-get update && \ 
+  sudo apt-get install -y git
+
+# standard clean operations
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 ENV HOME /home/jenkins
 RUN useradd -c "Jenkins user" -d $HOME -m -G sudo jenkins
 
@@ -31,6 +38,9 @@ RUN curl --create-dirs -sSLo /usr/share/jenkins/slave.jar http://repo.jenkins-ci
   && chmod 644 /usr/share/jenkins/slave.jar
 
 COPY jenkins-slave /usr/local/bin/jenkins-slave
+
+
+
 
 VOLUME /home/jenkins
 WORKDIR /home/jenkins
